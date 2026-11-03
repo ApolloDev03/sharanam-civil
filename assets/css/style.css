@@ -3460,7 +3460,7 @@ a.footer__contact-item:hover {
 .whx-grid {
     display: grid;
     grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
-    gap: clamp(48px, 7vw, 110px);
+    gap: 40px;
     align-items: center;
 }
 
@@ -3483,55 +3483,6 @@ a.footer__contact-item:hover {
     pointer-events: none;
 }
 
-.whx-stat {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 230px;
-    padding: 26px 26px 24px;
-    background: var(--orange);
-    color: #fff;
-}
-
-.whx-stat strong {
-    display: block;
-    font-family: Manrope, sans-serif;
-    font-size: 46px;
-    line-height: 1;
-    letter-spacing: -.06em;
-    font-weight: 800;
-}
-
-.whx-stat span {
-    display: block;
-    margin-top: 10px;
-    font-size: 14px;
-    line-height: 1.45;
-}
-
-.whx-since {
-    position: absolute;
-    left: -22px;
-    top: 34px;
-    padding: 14px 18px;
-    background: #fff;
-    box-shadow: 0 20px 40px -26px rgba(41, 41, 41, .4);
-    border-left: 3px solid var(--orange);
-}
-
-.whx-since span {
-    display: block;
-    font-size: 12px;
-    color: #888;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-}
-
-.whx-since strong {
-    font-family: Manrope, sans-serif;
-    font-size: 24px;
-    letter-spacing: -.04em;
-}
 
 .whx-point {
     position: relative;
@@ -4299,19 +4250,7 @@ a.footer__contact-item:hover {
         margin-left: 0;
     }
 
-    .whx-since {
-        left: 0;
-        top: 20px;
-    }
 
-    .whx-stat {
-        width: 190px;
-        padding: 20px;
-    }
-
-    .whx-stat strong {
-        font-size: 36px;
-    }
 
     .whx-point {
         grid-template-columns: 48px 1fr;
