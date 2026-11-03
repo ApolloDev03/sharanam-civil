@@ -19,26 +19,6 @@
   document.addEventListener('click',e=>{if(drop&&!drop.contains(e.target))dropOpen(false)});
   document.addEventListener('keydown',e=>{if(e.key==='Escape'){dropOpen(false);mobileOpen(false)}});
   window.addEventListener('resize',()=>{if(innerWidth>1120)mobileOpen(false)});
-  const slides=$$('.hero-slide'),dots=$$('#slideTrack button'),current=$('#slideCurrent'),hero=$('#home');
-  let index=0,lockUntil=0,scrollAcc=0,touchY=null;
-  function goSlide(n){if(n<0||n>=slides.length||n===index)return false;index=n;slides.forEach((s,i)=>{const active=i===n;s.classList.toggle('is-active',active);s.setAttribute('aria-hidden',String(!active));s.querySelectorAll('a').forEach(a=>{a.tabIndex=active?0:-1})});if(current)current.textContent=String(n+1).padStart(2,'0');lockUntil=Date.now()+(reduced?250:1100);return true}
-  $('#prevSlide')?.addEventListener('click',()=>goSlide((index-1+slides.length)%slides.length));
-  $('#nextSlide')?.addEventListener('click',()=>goSlide((index+1)%slides.length));
-  dots.forEach(d=>d.addEventListener('click',()=>goSlide(Number(d.dataset.go))));
-  // Scroll is intercepted only while the hero substantially occupies the viewport.
-  // Once a visitor has reached the last/first slide, native scrolling is allowed.
-  function heroInView(){const r=hero.getBoundingClientRect();return r.top<=135&&r.bottom>=innerHeight*.65}
-  window.addEventListener('wheel',e=>{
-    if(reduced||!heroInView()||e.ctrlKey||Math.abs(e.deltaY)<2)return;
-    const dir=Math.sign(e.deltaY);
-    if((dir>0&&index===slides.length-1)||(dir<0&&index===0))return;
-    if(Date.now()<lockUntil){e.preventDefault();return}
-    scrollAcc+=e.deltaY;
-    if(Math.abs(scrollAcc)<35){e.preventDefault();return}
-    e.preventDefault();goSlide(index+Math.sign(scrollAcc));scrollAcc=0;
-  },{passive:false});
-  hero?.addEventListener('touchstart',e=>{touchY=e.changedTouches[0]?.clientY??null},{passive:true});
-  hero?.addEventListener('touchend',e=>{if(touchY===null)return;const diff=touchY-(e.changedTouches[0]?.clientY??touchY);touchY=null;if(Math.abs(diff)>55)goSlide(index+Math.sign(diff))},{passive:true});
   // Reveal-on-scroll; no heavy scroll plugin required.
   if('IntersectionObserver' in window&&!reduced){const io=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');io.unobserve(entry.target)}}),{threshold:.1,rootMargin:'0px 0px -30px 0px'});$$('.reveal').forEach(el=>io.observe(el))}else{$$('.reveal').forEach(el=>el.classList.add('visible'))}
   const serviceItems=$$('.service-item');serviceItems.forEach(item=>{function activate(){const n=item.dataset.image;serviceItems.forEach(x=>x.classList.toggle('selected',x===item));$$('.service-image').forEach(x=>x.classList.toggle('active',x.dataset.photo===n))}item.addEventListener('mouseenter',activate);item.addEventListener('focus',activate)});
