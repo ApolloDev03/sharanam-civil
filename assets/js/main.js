@@ -25,8 +25,8 @@
 
   // Only one FAQ open at once.
   $$('.faq-list details').forEach(d=>d.addEventListener('toggle',()=>{if(d.open)$$('.faq-list details').filter(x=>x!==d).forEach(x=>x.open=false)}));
-  $('#year').textContent=String(new Date().getFullYear());
-  $('#contactForm')?.addEventListener('submit',e=>{e.preventDefault();const f=e.currentTarget;if(!f.reportValidity())return;const data=new FormData(f);const subject=encodeURIComponent('Project Enquiry — '+data.get('type'));const body=encodeURIComponent(`Name: ${data.get('name')}\nEmail: ${data.get('email')}\nPhone: ${data.get('phone')}\nProject type: ${data.get('type')}\n\n${data.get('message')}`);window.location.href=`mailto:info@sharanamconsultants.com?subject=${subject}&body=${body}`});
+  if ($('#year')) $('#year').textContent=String(new Date().getFullYear());
+  
 })();
 
 
